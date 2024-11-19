@@ -1,0 +1,118 @@
+/* Root Variables */
+:root {
+    --bg-dark: #1a1a1a;
+    --card-dark: #2d2d2d;
+    --border-dark: #404040;
+    --text-light: #f8f9fa;
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+}
+
+/* General Styles */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #242424 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 2rem;
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--card-dark);
+    border-color: var(--border-dark);
+    border: none;
+    transition: transform 0.2s;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title, .card-text, .price {
+    color: var(--text-light);
+}
+
+/* Table Styling */
+.table {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+}
+
+.table td, .table th {
+    border-color: var(--border-dark);
+}
+
+/* Form Controls */
+.form-control {
+    background-color: var(--card-dark);
+    border-color: var(--border-dark);
+    color: var(--text-light);
+}
+
+.form-control:focus {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(52,152,219,0.25);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+/* Alerts */
+.alert {
+    background-color: var(--card-dark);
+    border-color: var(--border-dark);
+    color: var(--text-light);
+}
+
+/* Cart Badge */
+.cart-badge {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Auth Forms */
+.auth-form {
+    background-color: var(--card-dark);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+.footer {
+    background-color: #242424 !important;
+    color: var(--text-light);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    .table {
+        font-size: 0.875rem;
+    }
+}

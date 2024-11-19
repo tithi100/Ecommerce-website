@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-5">Admin Dashboard</h1>
+    </div>
+</div>
+
+<!-- User Management Section -->
+<div class="card mb-4">
+    <div class="card-header bg-dark text-white">
+        <h2 class="h5 mb-0">
+            <i class="bi bi-people"></i> User Management
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>User Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>
+                            <i class="bi bi-person-circle me-2"></i>
+                            {{ user[1] }}
+                        </td>
+                        <td>{{ user[2] }}</td>
+                        <td>
+                            {% if user[3] == 'admin' %}
+                                <span class="badge bg-danger">Admin</span>
+                            {% elif user[3] == 'seller' %}
+                                <span class="badge bg-primary">Seller</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Customer</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form action="{{ url_for('remove_user', user_id=user[0]) }}" method="POST" 
+                                  class="d-inline"
+                                  onsubmit="return confirm('Are you sure you want to remove this user? This will also remove all their orders and products.');">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Remove
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Product Management Section -->
+<div class="card">
+    <div class="card-header bg-dark text-white">
+        <h2 class="h5 mb-0">
+            <i class="bi bi-box-seam"></i> Product Management
+        </h2>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>
+                            {% if product[0] == 'regular' %}
+                                <span class="badge bg-info">Store</span>
+                            {% else %}
+                                <span class="badge bg-primary">Seller</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ product[2] }}</td>
+                        <td>${{ "%.2f"|format(product[3]) }}</td>
+                        <td>
+                            {% if product[4] < 10 %}
+                                <span class="text-danger">{{ product[4] }}</span>
+                            {% else %}
+                                {{ product[4] }}
+                            {% endif %}
+                        </td>
+                        <td>{{ product[5] }}</td>
+                        <td>
+                            <form action="{{ url_for('remove_product') }}" method="POST"
+                                  class="d-inline"
+                                  onsubmit="return confirm('Are you sure you want to remove this product?');">
+                                <input type="hidden" name="product_id" value="{{ product[1] }}">
+                                <input type="hidden" name="product_source" value="{{ product[0] }}">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Remove
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
